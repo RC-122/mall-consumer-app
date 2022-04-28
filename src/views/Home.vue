@@ -1,16 +1,19 @@
 <template>
-  <div id="app">
+  <div>
     <router-view></router-view>
+    <TabBar />
   </div>
 </template>
+
 <script>
-// import Home from './views/Home.vue';
+import TabBar from '@/components/TabBar.vue';
 
 export default {
   components: {
-    // Home,
+    TabBar,
   },
 };
 </script>
-<style lang="less">
+
+<style>
 </style>
