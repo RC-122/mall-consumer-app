@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
 import tool from "../utils/tool";
 
 export default {
@@ -30,6 +30,8 @@ export default {
     }),
   },
   methods: {
+    ...mapMutations(["resetGoodsList"]),
+    ...mapActions(["getGoodsList"]),
     scrollTo(i, e) {
       if (this.move) {
         return;
@@ -47,7 +49,21 @@ export default {
         side,
         "scrollTop"
       );
+      this.resetGoodsList();
+      this.getGoodsList({
+        type: this.sideBarList[i],
+        page: 1,
+        sortType: "all",
+      });
     },
+  },
+  mounted() {
+    this.resetGoodsList();
+    this.getGoodsList({
+      type: this.sideBarList[0],
+      page: 1,
+      sortType: "all",
+    });
   },
 };
 </script>
@@ -84,7 +100,7 @@ export default {
   }
 }
 .sidebar-container::-webkit-scrollbar {
-    width:0px;
-    background-color: none;
+  width: 0px;
+  background-color: none;
 }
 </style>

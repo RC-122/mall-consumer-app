@@ -1,22 +1,34 @@
 <template>
   <div class="classify-container">
-    <div class="search-btn">
+    <router-link to="/search" tag="div" class="search-btn">
       <van-icon name="search" />
       特价特价跳楼大甩卖
-    </div>
+    </router-link>
     <OneTab />
+    <template v-if="showContent">
     <SideBar />
+    <GoodsList/>
+    </template>
+    <van-loading color="#1989fa" vertical v-else/>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import OneTab from '../components/OneTab.vue';
 import SideBar from '../components/SideBar.vue';
+import GoodsList from '@/components/GoodsList.vue';
 
 export default {
+  computed:{
+    ...mapState({
+      showContent:(state) =>state.showContent,
+    })
+  },
   components: {
     OneTab,
-    SideBar
+    SideBar,
+    GoodsList,
 },
 };
 </script>
